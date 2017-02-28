@@ -74,7 +74,7 @@ public class AddActivity extends AppCompatActivity {
 
 
         Set<String> set2 = new HashSet<String>();
-        
+
         set2.addAll(data);
 //        Log.d("set2", set2.toString());
         editor2.putStringSet(keyString2, set2);
