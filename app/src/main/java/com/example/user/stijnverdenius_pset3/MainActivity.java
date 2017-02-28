@@ -17,16 +17,17 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
 
-//    TextView trys;
+    TextView trys;
+    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
 
-//        trys = (TextView) findViewById(R.id.trys);
+        trys = (TextView) findViewById(R.id.trys);
 
     }
 
@@ -34,15 +35,19 @@ public class MainActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         Log.d("resumed", "back");
-//        SharedPreferences sharedPref = this.getPreferences(this.MODE_PRIVATE);
-//        String highScore = sharedPref.getString("uno", null); // getting String;
-//        trys.setText(highScore);
+        sharedPref = getSharedPreferences("your_file_name", MODE_PRIVATE);
+        String highScore = sharedPref.getString("uno", "leeg"); // getting String;
+        Log.d("banana", highScore);
+        trys.setText(highScore);
     }
 
     public void pressAdd(View view) {
         Log.d("show", "button pressed");
-        Intent inteNext = new Intent(this, ShowActivity.class);
-        startActivity(inteNext);
+//        Intent inteNext = new Intent(this, ShowActivity.class);
+//        startActivity(inteNext);
+        String highScore = sharedPref.getString("uno", "leeg"); // getting String;
+        Log.d("banana", highScore);
+        trys.setText(highScore);
     }
 
     public void pressRemove(View view) {
