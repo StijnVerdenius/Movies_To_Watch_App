@@ -42,12 +42,10 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/Bar"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:visibility="invisible"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="hallo"/>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -55,6 +53,12 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hallo"
+            android:id="@+id/trys"/>
 
 
         <android.support.design.widget.FloatingActionButton
