@@ -74,25 +74,27 @@ public class AddActivity extends AppCompatActivity {
 
 
         Set<String> set2 = new HashSet<String>();
+        
         set2.addAll(data);
+//        Log.d("set2", set2.toString());
         editor2.putStringSet(keyString2, set2);
 
 
 
-        editor1.commit();
-        editor2.commit();
-
-
-
-        String highScore = sharedPref.getString(keyString1, "leeg"); // getting String;
-        Set<String> highScore2;
-        Set<String> s = Collections.emptySet();
-        highScore2 = sharedPref2.getStringSet(keyString2, s);
-
-
-
-        Log.d("ed1", highScore);
-        Log.d("ed2", highScore2.toString());
+//        editor1.commit();
+//        editor2.commit();
+//
+//
+//
+//        String highScore = sharedPref.getString(keyString1, "leeg"); // getting String;
+//        Set<String> highScore2;
+//        Set<String> s = Collections.emptySet();
+//        highScore2 = sharedPref2.getStringSet(keyString2, s);
+//
+//
+//
+//        Log.d("ed1", highScore);
+//        Log.d("ed2", highScore2.toString());
 
         finish();
     }

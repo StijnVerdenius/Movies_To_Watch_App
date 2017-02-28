@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Log.d("resumed", "back");
         SharedPreferences sharedPref = getSharedPreferences("list1", MODE_PRIVATE);
-        SharedPreferences sharedPref2 = getSharedPreferences("list2", MODE_APPEND);
+        SharedPreferences sharedPref2 = getSharedPreferences("list2", MODE_PRIVATE);
 
         int listsize;
         try {
