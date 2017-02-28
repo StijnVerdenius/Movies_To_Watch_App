@@ -12,6 +12,9 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -50,16 +53,47 @@ public class AddActivity extends AppCompatActivity {
             Toast.makeText(this, tellthem, (Toast.LENGTH_SHORT)).show();
         }
 
-//        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-//        Editor editor = pref.edit();
+        SharedPreferences sharedPref = getSharedPreferences("list1", MODE_APPEND);
+        SharedPreferences sharedPref2 = getSharedPreferences("list2", MODE_APPEND);
+
+        int listsize;
+        try {
+            listsize = sharedPref.getAll().size();
+        } catch (Exception e) {
+            listsize = 0;
+        }
+
+        String keyString1 = String.format("1listItem%i", listsize+1);
+        String keyString2 = String.format("2listItem%i", listsize+1);
 
 
-        SharedPreferences sharedPref = getSharedPreferences("your_file_name", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("uno", data.toString());
-        editor.commit();
-        String highScore = sharedPref.getString("uno", "leeg"); // getting String;
-        Log.d("banana", highScore);
+        SharedPreferences.Editor editor1 = sharedPref.edit();
+        SharedPreferences.Editor editor2 = sharedPref2.edit();
+
+        editor1.putString(keyString1, data.get(0));
+
+
+        Set<String> set2 = new HashSet<String>();
+        set2.addAll(data);
+        editor2.putStringSet(keyString2, set2);
+
+
+
+        editor1.commit();
+        editor2.commit();
+
+
+
+        String highScore = sharedPref.getString(keyString1, "leeg"); // getting String;
+        Set<String> highScore2;
+        Set<String> s = Collections.emptySet();
+        highScore2 = sharedPref2.getStringSet(keyString2, s);
+
+
+
+        Log.d("ed1", highScore);
+        Log.d("ed2", highScore2.toString());
+
         finish();
     }
 }

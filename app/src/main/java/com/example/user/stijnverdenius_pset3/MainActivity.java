@@ -11,6 +11,10 @@ import android.view.View;
 import android.util.Log;
 import android.view.Window;
 import android.widget.TextView;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Set;
 //import Shared
 
 
@@ -35,10 +39,31 @@ public class MainActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         Log.d("resumed", "back");
-        sharedPref = getSharedPreferences("your_file_name", MODE_PRIVATE);
-        String highScore = sharedPref.getString("uno", "leeg"); // getting String;
-        Log.d("banana", highScore);
-        trys.setText(highScore);
+        SharedPreferences sharedPref = getSharedPreferences("list1", MODE_PRIVATE);
+        SharedPreferences sharedPref2 = getSharedPreferences("list2", MODE_APPEND);
+
+        int listsize;
+        try {
+            listsize = sharedPref.getAll().size();
+        } catch (Exception e) {
+            listsize = 0;
+        }
+        String keyString2 = String.format("2listItem%d", listsize+1);
+        String keyString1 = String.format("1listItem%d", listsize+1);
+        String highScore = sharedPref.getString(keyString1, "leeg"); // getting String;
+        Set<String> highScore2;
+//        try {
+        Set<String> s = Collections.emptySet();
+        highScore2 = sharedPref2.getStringSet(keyString2, s);
+//        } catch (Exception e) {
+//            Log.d("fail", "set");
+//            highScore2 = Collections.emptySet();
+//        }
+
+
+        Log.d("ed1", highScore);
+        Log.d("ed2", highScore2.toString());
+        trys.setText(keyString1);
     }
 
     public void pressAdd(View view) {
