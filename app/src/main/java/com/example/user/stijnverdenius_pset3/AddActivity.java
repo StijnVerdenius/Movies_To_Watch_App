@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
 import java.util.ArrayList;
 
@@ -47,7 +49,15 @@ public class AddActivity extends AppCompatActivity {
             String tellthem = "Movie not found :(";
             Toast.makeText(this, tellthem, (Toast.LENGTH_SHORT)).show();
         }
-        // safe data
+
+//        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+//        Editor editor = pref.edit();
+
+
+        SharedPreferences sharedPref = this.getPreferences(this.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("uno", data.toString());
+        editor.commit();
         finish();
     }
 }
