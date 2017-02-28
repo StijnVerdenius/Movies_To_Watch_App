@@ -54,10 +54,10 @@ public class AddActivity extends AppCompatActivity {
 //        Editor editor = pref.edit();
 
 
-        SharedPreferences sharedPref = this.getPreferences(this.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("uno", data.toString());
-        editor.commit();
+//        SharedPreferences sharedPref = this.getPreferences(this.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPref.edit();
+//        editor.putString("uno", data.toString());
+//        editor.commit();
         finish();
     }
 }

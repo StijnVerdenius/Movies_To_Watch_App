@@ -25,7 +25,7 @@ public class get_hppt_reqt {
         chosentag.replaceAll(" ", "_");
 
         String urlstring = String.format("http://www.omdbapi.com/?t=%s",chosentag);
-
+        Log.d("url", urlstring);
         URL url = null;
 
         try {
@@ -42,6 +42,7 @@ public class get_hppt_reqt {
                 connect.setRequestMethod("GET");
 
                 Integer responseCode = connect.getResponseCode();
+                Log.d("respo", responseCode.toString());
                 if (responseCode >= 200 && responseCode < 300) {
                     BufferedReader breader = new BufferedReader(new InputStreamReader(connect.getInputStream()));
                     String line;
@@ -55,6 +56,8 @@ public class get_hppt_reqt {
 
             }
         }
+
+        Log.d("result", result);
 
 
         return result;

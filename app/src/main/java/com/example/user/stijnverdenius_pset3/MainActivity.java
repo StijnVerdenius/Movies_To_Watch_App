@@ -17,14 +17,16 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
 
-    TextView trys;
+//    TextView trys;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        trys = (TextView) findViewById(R.id.trys);
+
+
+//        trys = (TextView) findViewById(R.id.trys);
 
     }
 
@@ -32,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         Log.d("resumed", "back");
-        SharedPreferences sharedPref = this.getPreferences(this.MODE_PRIVATE);
-        String highScore = sharedPref.getString("uno", null); // getting String;
-        trys.setText(highScore);
+//        SharedPreferences sharedPref = this.getPreferences(this.MODE_PRIVATE);
+//        String highScore = sharedPref.getString("uno", null); // getting String;
+//        trys.setText(highScore);
     }
 
     public void pressAdd(View view) {
