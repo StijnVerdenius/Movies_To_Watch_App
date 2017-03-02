@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,16 +22,48 @@ import java.util.Set;
 
 public class ShowActivity extends AppCompatActivity {
 
+    JSONObject trackstreamObj;
+    String Input;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
-
+        Intent intentArriving = getIntent();
+        Input = intentArriving.getStringExtra("movie");
+        trackSearch();
     }
 
-    public void trackStartIntent(ArrayList<String> data) {
+    public void trackSearch() {
+        Async2 asyncTask2 = new Async2(this);
+        asyncTask2.execute(Input);
+    }
+
+    public void trackStartIntent(String dataRaw) {
+
+        ArrayList<String> data = new ArrayList<String>();
+        try {
+            trackstreamObj = new JSONObject(dataRaw);
+            String title = (String) trackstreamObj.get("Title");
+            String year = (String) trackstreamObj.get("Year");
+            String director = (String) trackstreamObj.get("Director");
+            String plot = (String) trackstreamObj.get("Plot");
+            String actors = (String) trackstreamObj.get("Actors");
+            String image = (String) trackstreamObj.get("Poster");
+
+            data.add(title);
+            data.add(year);
+            data.add(director);
+            data.add(plot);
+            data.add(actors);
+            data.add(image);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
 
         if (data.size() == 0) {
             String tellthem = "Movie not found :(";
@@ -66,20 +101,6 @@ public class ShowActivity extends AppCompatActivity {
 
         finish();
     }
-
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK) {
-//            Log.d("back", "ANDROID BUTTON PRESSED");
-//            Intent inteNext = new Intent(this, MainActivity.class);
-//            startActivity(inteNext);
-//            finish();
-//            return true;
-//        }
-//
-//        return super.onKeyDown(keyCode, event);
-//    }
-
 
 
 }

@@ -101,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void toShow(int position) {
         Intent inteNext = new Intent(this, ShowActivity.class);
-        inteNext.putExtra("position", position);
+        String keyString2 = String.format("1listItem%d", position);
+        inteNext.putExtra("movie", sharedPref.getString(keyString2, ""));
         startActivity(inteNext);
     }
 

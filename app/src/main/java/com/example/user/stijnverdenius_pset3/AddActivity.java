@@ -54,15 +54,18 @@ public class AddActivity extends AppCompatActivity {
         trackSearch(view);
     }
 
-    public void trackStartIntent(ArrayList<String> data) {
+    public void trackStartIntent(String data) {
 
-        if (data.size() == 0) {
+        if (data.equals("")) {
             String tellthem = "Movie not found :(";
             Toast.makeText(this, tellthem, (Toast.LENGTH_SHORT)).show();
+            Intent inteNext = new Intent(this, AddActivity.class);
+            startActivity(inteNext);
+            finish();
         }
 
         SharedPreferences sharedPref = getSharedPreferences("list1", MODE_APPEND);
-        SharedPreferences sharedPref2 = getSharedPreferences("list2", MODE_APPEND);
+//        SharedPreferences sharedPref2 = getSharedPreferences("list2", MODE_APPEND);
 
         int listsize;
         try {
@@ -72,23 +75,23 @@ public class AddActivity extends AppCompatActivity {
         }
 
         String keyString1 = String.format("1listItem%d", listsize);
-        String keyString2 = String.format("2listItem%d", listsize);
+//        String keyString2 = String.format("2listItem%d", listsize);
 
         SharedPreferences.Editor editor1 = sharedPref.edit();
-        SharedPreferences.Editor editor2 = sharedPref2.edit();
+//        SharedPreferences.Editor editor2 = sharedPref2.edit();
 
-        editor1.putString(keyString1, data.get(0));
+        editor1.putString(keyString1, data);
 
-        Set<String> set2 = new HashSet<String>();
+//        Set<String> set2 = new HashSet<String>();
 
-        set2.addAll(data);
-        editor2.putStringSet(keyString2, set2);
+//        set2.addAll(data);
+//        editor2.putStringSet(keyString2, set2);
 
         editor1.commit();
-        editor2.commit();
+//        editor2.commit();
 
-        Log.d(keyString1, data.get(0));
-        Log.d(keyString2, set2.toString());
+        Log.d(keyString1, data);
+//        Log.d(keyString2, set2.toString());
 
         finish();
     }

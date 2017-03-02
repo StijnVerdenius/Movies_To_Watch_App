@@ -38,29 +38,18 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String result) {
 
         super.onPostExecute(result);
-        ArrayList<String> data = new ArrayList<String>();
+
+        String title;
         try {
             JSONObject trackstreamObj = new JSONObject(result);
-            String title = (String) trackstreamObj.get("Title");
-            String year = (String) trackstreamObj.get("Year");
-            String director = (String) trackstreamObj.get("Director");
-            String plot = (String) trackstreamObj.get("Plot");
-            String actors = (String) trackstreamObj.get("Actors");
-            String image = (String) trackstreamObj.get("Poster");
-
-            data.add(title);
-            data.add(year);
-            data.add(director);
-            data.add(plot);
-            data.add(actors);
-            data.add(image);
+            title = (String) trackstreamObj.get("Title");
 
         } catch (JSONException e) {
             e.printStackTrace();
+            title = "";
         }
-        Log.d("data", data.toString());
-        this.mainact.trackStartIntent(data);
-
+        Log.d("recieved : ", title);
+        this.mainact.trackStartIntent(title);
     }
 
 
