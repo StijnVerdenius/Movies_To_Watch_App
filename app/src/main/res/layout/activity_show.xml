@@ -65,19 +65,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/title1"
-                android:text="titel"/>
+                android:text="titel"
+                android:padding="7dp"
+                android:textSize="24sp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/year"
-                android:text="jaar"/>
+                android:text="jaar"
+                android:padding="3dp"
+                />
 
             <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/actors"
-                android:text="acteurs"/>
+                android:text="acteurs"
+                android:padding="3dp"
+                />
 
 
         </LinearLayout>
