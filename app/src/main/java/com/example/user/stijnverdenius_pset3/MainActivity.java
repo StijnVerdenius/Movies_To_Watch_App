@@ -10,6 +10,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.util.Log;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -21,10 +25,9 @@ import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    TextView trys;
     SharedPreferences sharedPref;
     ArrayList<String> results;
+    ListView listMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         sharedPref = getSharedPreferences("list1", MODE_PRIVATE);
-        trys = (TextView) findViewById(R.id.trys);
         results = new ArrayList<String>();
+        listMain = (ListView) findViewById(R.id.listMain);
 
     }
 
@@ -67,16 +70,12 @@ public class MainActivity extends AppCompatActivity {
 
 //        Log.d(keyString1, highScore);
 //        Log.d(keyString2, highScore2.toString());
-        trys.setText(results.toString());
     }
 
     public void pressAdd(View view) {
         Log.d("show", "button pressed");
         Intent inteNext = new Intent(this, ShowActivity.class);
         startActivity(inteNext);
-//        String highScore = sharedPref.getString("uno", "leeg"); // getting String;
-//        Log.d("banana", highScore);
-//        trys.setText(highScore);
     }
 
     public void pressRemove(View view) {
@@ -86,8 +85,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void makeAdapter(ArrayList<String> results) {
-        
+        ListAdapter arrdap = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, results );
+
+        assert listMain != null;
+
+        listMain.setAdapter(arrdap);
+
+        listMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("click", Integer.toString(position));
+            }
+        });
     }
+
+
 
 
 

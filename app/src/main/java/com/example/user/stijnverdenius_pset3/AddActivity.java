@@ -40,7 +40,18 @@ public class AddActivity extends AppCompatActivity {
         Input.getText().clear();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Log.d("back", "ANDROID BUTTON PRESSED");
+            Intent inteNext = new Intent(this, MainActivity.class);
+            startActivity(inteNext);
+            finish();
+            return true;
+        }
 
+        return super.onKeyDown(keyCode, event);
+    }
 
     public void pressAdd(View view) {
         trackSearch(view);
