@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             listsize = 0;
         }
-        String keyString2 = String.format("2listItem%d", listsize+1);
-        String keyString1 = String.format("1listItem%d", listsize+1);
+        String keyString2 = String.format("2listItem%d", listsize);
+        String keyString1 = String.format("1listItem%d", listsize);
         String highScore = sharedPref.getString(keyString1, "leeg"); // getting String;
         Set<String> highScore2;
 //        try {
@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
 
-        Log.d("ed1", highScore);
-        Log.d("ed2", highScore2.toString());
+        Log.d(keyString1, highScore);
+        Log.d(keyString2, highScore2.toString());
         trys.setText(keyString1);
     }
 

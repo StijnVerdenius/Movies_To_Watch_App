@@ -63,16 +63,16 @@ public class AddActivity extends AppCompatActivity {
             listsize = 0;
         }
 
-        String keyString1 = String.format("1listItem%i", listsize+1);
-        String keyString2 = String.format("2listItem%i", listsize+1);
+        String keyString1 = String.format("1listItem%d", listsize+1);
+        String keyString2 = String.format("2listItem%d", listsize+1);
 
 
         SharedPreferences.Editor editor1 = sharedPref.edit();
         SharedPreferences.Editor editor2 = sharedPref2.edit();
-
+//
         editor1.putString(keyString1, data.get(0));
-
-
+//
+//
         Set<String> set2 = new HashSet<String>();
 
         set2.addAll(data);
@@ -81,8 +81,8 @@ public class AddActivity extends AppCompatActivity {
 
 
 
-//        editor1.commit();
-//        editor2.commit();
+        editor1.commit();
+        editor2.commit();
 //
 //
 //
@@ -93,8 +93,8 @@ public class AddActivity extends AppCompatActivity {
 //
 //
 //
-//        Log.d("ed1", highScore);
-//        Log.d("ed2", highScore2.toString());
+        Log.d(keyString1, data.get(0));
+        Log.d(keyString2, set2.toString());
 
         finish();
     }
