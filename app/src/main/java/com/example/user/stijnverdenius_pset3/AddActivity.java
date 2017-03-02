@@ -27,9 +27,6 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
         Input = (EditText) findViewById(R.id.InputText);
         assert Input != null;
-//        Bundle extras =
-
-
     }
 
 
@@ -40,18 +37,18 @@ public class AddActivity extends AppCompatActivity {
         Input.getText().clear();
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Log.d("back", "ANDROID BUTTON PRESSED");
-            Intent inteNext = new Intent(this, MainActivity.class);
-            startActivity(inteNext);
-            finish();
-            return true;
-        }
-
-        return super.onKeyDown(keyCode, event);
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode == KeyEvent.KEYCODE_BACK) {
+//            Log.d("back", "ANDROID BUTTON PRESSED");
+//            Intent inteNext = new Intent(this, MainActivity.class);
+//            startActivity(inteNext);
+//            finish();
+//            return true;
+//        }
+//
+//        return super.onKeyDown(keyCode, event);
+//    }
 
     public void pressAdd(View view) {
         trackSearch(view);
@@ -74,36 +71,22 @@ public class AddActivity extends AppCompatActivity {
             listsize = 0;
         }
 
-        String keyString1 = String.format("1listItem%d", listsize+1);
-        String keyString2 = String.format("2listItem%d", listsize+1);
-
+        String keyString1 = String.format("1listItem%d", listsize);
+        String keyString2 = String.format("2listItem%d", listsize);
 
         SharedPreferences.Editor editor1 = sharedPref.edit();
         SharedPreferences.Editor editor2 = sharedPref2.edit();
-//
+
         editor1.putString(keyString1, data.get(0));
-//
-//
+
         Set<String> set2 = new HashSet<String>();
 
         set2.addAll(data);
-//        Log.d("set2", set2.toString());
         editor2.putStringSet(keyString2, set2);
-
-
 
         editor1.commit();
         editor2.commit();
-//
-//
-//
-//        String highScore = sharedPref.getString(keyString1, "leeg"); // getting String;
-//        Set<String> highScore2;
-//        Set<String> s = Collections.emptySet();
-//        highScore2 = sharedPref2.getStringSet(keyString2, s);
-//
-//
-//
+
         Log.d(keyString1, data.get(0));
         Log.d(keyString2, set2.toString());
 

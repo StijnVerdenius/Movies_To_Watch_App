@@ -22,7 +22,7 @@ public class get_hppt_reqt {
         String result = "";
         String chosentag = params[0];
 
-        chosentag.replaceAll(" ", "_");
+        chosentag = chosentag.replaceAll(" ", "_");
 
         String urlstring = String.format("http://www.omdbapi.com/?t=%s",chosentag);
         Log.d("url", urlstring);

@@ -42,63 +42,68 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        listMain.setAdapter(null);
+        results.clear();
+    }
+
+    @Override
     public void onResume(){
         super.onResume();
-        Log.d("resumed", "back");
 
-//        SharedPreferences sharedPref2 = getSharedPreferences("list2", MODE_PRIVATE);
+        Log.d("resumed", "back");
+        listMain.setAdapter(null);
 
         int listsize;
         try {
             listsize = sharedPref.getAll().size();
         } catch (Exception e) {
-            listsize = 0;
+            listsize = -1;
         }
-//        String keyString2 = String.format("2listItem%d", listsize);
 
         String keyString1;
-        for (int i = 0; i < listsize; i++ ) {
+        for (int i = 0; i <= listsize; i++ ) {
             keyString1 = String.format("1listItem%d", i);
-            results.add(sharedPref.getString(keyString1, "leeg"));
+            results.add(sharedPref.getString(keyString1, ""));
         }
-        makeAdapter(results);
+        if (listsize > 0) {
+            makeAdapter(results);
+        }
 
-//        Set<String> highScore2;
-
-//        Set<String> s = Collections.emptySet();
-//        highScore2 = sharedPref2.getStringSet(keyString2, s);
-
-//        Log.d(keyString1, highScore);
-//        Log.d(keyString2, highScore2.toString());
     }
 
     public void pressAdd(View view) {
         Log.d("show", "button pressed");
-        Intent inteNext = new Intent(this, ShowActivity.class);
+        Intent inteNext = new Intent(this, AddActivity.class);
         startActivity(inteNext);
     }
 
     public void pressRemove(View view) {
         Log.d("remove", "button pressed");
-        Intent inteNext = new Intent(this, AddActivity.class);
-        startActivity(inteNext);
+        listMain.setAdapter(null);
+        this.getSharedPreferences("list1", MODE_PRIVATE).edit().clear().commit();
+        this.getSharedPreferences("list2", MODE_PRIVATE).edit().clear().commit();
     }
 
     public void makeAdapter(ArrayList<String> results) {
         ListAdapter arrdap = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, results );
-
-        assert listMain != null;
-
         listMain.setAdapter(arrdap);
-
         listMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("click", Integer.toString(position));
+                toShow(position);
+
             }
         });
     }
 
+    public void toShow(int position) {
+        Intent inteNext = new Intent(this, ShowActivity.class);
+        inteNext.putExtra("position", position);
+        startActivity(inteNext);
+    }
 
 
 

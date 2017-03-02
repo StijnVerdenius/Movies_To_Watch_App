@@ -20,25 +20,20 @@ public class ShowActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Log.d("back", "ANDROID BUTTON PRESSED");
-            Intent inteNext = new Intent(this, MainActivity.class);
-            startActivity(inteNext);
-            finish();
-            return true;
-        }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode == KeyEvent.KEYCODE_BACK) {
+//            Log.d("back", "ANDROID BUTTON PRESSED");
+//            Intent inteNext = new Intent(this, MainActivity.class);
+//            startActivity(inteNext);
+//            finish();
+//            return true;
+//        }
+//
+//        return super.onKeyDown(keyCode, event);
+//    }
 
-        return super.onKeyDown(keyCode, event);
-    }
 
-    public void pressBack(View view) {
-        Log.d("back", "button pressed");
-        Intent inteNext = new Intent(this, MainActivity.class);
-        startActivity(inteNext);
-        finish();
-    }
 
 }
 
