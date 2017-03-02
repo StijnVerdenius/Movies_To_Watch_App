@@ -9,12 +9,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,37 +78,20 @@ public class ShowActivity extends AppCompatActivity {
 
 
             try {
-                URL url = new URL((String) trackstreamObj.get("Poster"));
+                URL url = new URL((String) trackstreamObj.get("Poster") );
                 Log.d("url", url.toString());
+
+                DisplayMetrics displaymetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+                int width = displaymetrics.widthPixels /3;
                 Picasso.with(this)
-                        .load(url)
-                        .resize(40d,40d).into(picture);
-//                try {
-//                    Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//                    picture.setImageBitmap(bmp);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
+                        .load(String.valueOf(trackstreamObj.get("Poster"))).resize(width,width).into(picture);
+
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
 
-
-
-
-
-
-
-//            picture.setBackgroundResource();
-//            String image =
-
-//            data.add(title);
-//            data.add(year);
-//            data.add(director);
-//            data.add(plot);
-//            data.add(actors);
-//            data.add(image);
 
         } catch (JSONException e) {
             e.printStackTrace();
