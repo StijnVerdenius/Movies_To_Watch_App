@@ -97,6 +97,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        listMain.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String keyString3 = String.format("1listItem%d", position);
+                getSharedPreferences("list1", MODE_PRIVATE).edit().remove(keyString3).commit();
+                return true;
+            }
+        });
     }
 
     public void toShow(int position) {
@@ -105,10 +113,5 @@ public class MainActivity extends AppCompatActivity {
         inteNext.putExtra("movie", sharedPref.getString(keyString2, ""));
         startActivity(inteNext);
     }
-
-
-
-
-
 
 }
