@@ -29,7 +29,7 @@ public class Async2 extends AsyncTask<String, Integer, String> {
 
     @Override
     protected void onPreExecute() {
-        String tellthem = "searching...";
+        String tellthem = "loading...";
         Toast.makeText(context, tellthem, (Toast.LENGTH_SHORT)).show();
     }
 
