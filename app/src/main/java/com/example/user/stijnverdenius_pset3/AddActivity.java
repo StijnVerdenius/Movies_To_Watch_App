@@ -74,7 +74,7 @@ public class AddActivity extends AppCompatActivity {
             listsize = 0;
         }
 
-        String keyString1 = String.format("1listItem%d", listsize);
+        String keyString1 = data;
 //        String keyString2 = String.format("2listItem%d", listsize);
 
         SharedPreferences.Editor editor1 = sharedPref.edit();

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
 //import Shared
 
@@ -41,6 +42,36 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void refresh() {
+        results.clear();
+
+        listMain.setAdapter(null);
+        Map<String, ?> all = sharedPref.getAll();
+        int listsize;
+        try {
+            listsize = all.size();
+        } catch (Exception e) {
+            listsize = -1;
+        }
+
+        String keyString1;
+//        for (int i = 0; i <= listsize; i++ ) {
+        for (Map.Entry<String, ?> entry : all.entrySet()) {
+            keyString1 = entry.getKey().toString();
+            Log.d("map values",entry.getKey() + ": " +
+                    entry.getValue().toString());
+
+//                    String.format("1listItem%d", i);
+            String tempstring = sharedPref.getString(keyString1, "");
+            if (tempstring.equals("") == false) {
+                results.add(tempstring);
+            }
+        }
+        if (listsize > 0) {
+            makeAdapter(results);
+        }
+    }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -51,27 +82,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-
-        Log.d("resumed", "back");
         listMain.setAdapter(null);
-
-        int listsize;
-        try {
-            listsize = sharedPref.getAll().size();
-        } catch (Exception e) {
-            listsize = -1;
-        }
-
-        String keyString1;
-        for (int i = 0; i <= listsize; i++ ) {
-            keyString1 = String.format("1listItem%d", i);
-            results.add(sharedPref.getString(keyString1, ""));
-        }
-        if (listsize > 0) {
-            makeAdapter(results);
-        }
+        Log.d("resumed", "back");
+        refresh();
 
     }
+
+
 
     public void pressAdd(View view) {
         Log.d("show", "button pressed");
@@ -93,24 +110,48 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("click", Integer.toString(position));
-                toShow(position);
+
+//                TextView textView = (TextView) view.findViewById(R.id.list_content);
+//                String text = textView.getText().toString();
+
+
+//                String movie = getViewByPosition(position, listMain).getText();
+                String movie = (String)(listMain.getItemAtPosition(position));
+                Log.d("click", movie);
+                toShow(movie);
 
             }
         });
         listMain.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                String keyString3 = String.format("1listItem%d", position);
+                String keyString3 = (String)(listMain.getItemAtPosition(position));
                 getSharedPreferences("list1", MODE_PRIVATE).edit().remove(keyString3).commit();
+                listMain.setAdapter(null);
+//                listMain.setEmptyView(listMain);
+                refresh();
                 return true;
             }
         });
     }
 
-    public void toShow(int position) {
+    public View getViewByPosition(int pos, ListView listView) {
+        final int firstListItemPosition = listView.getFirstVisiblePosition();
+        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
+
+        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
+            return listView.getAdapter().getView(pos, null, listView);
+        } else {
+            final int childIndex = pos - firstListItemPosition;
+            return listView.getChildAt(childIndex);
+        }
+    }
+
+    public void toShow(String position) {
         Intent inteNext = new Intent(this, ShowActivity.class);
-        String keyString2 = String.format("1listItem%d", position);
-        inteNext.putExtra("movie", sharedPref.getString(keyString2, ""));
+//        String keyString2 = String.format("1listItem%d", position);
+        inteNext.putExtra("movie", position);//sharedPref.getString(keyString2, ""));
+        Log.d("startintent", position);
         startActivity(inteNext);
     }
 

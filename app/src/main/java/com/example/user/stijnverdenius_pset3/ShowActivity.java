@@ -83,7 +83,7 @@ public class ShowActivity extends AppCompatActivity {
 
                 DisplayMetrics displaymetrics = new DisplayMetrics();
                 getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-                int width = displaymetrics.widthPixels /3;
+                int width = (9*displaymetrics.heightPixels) /32;
                 Picasso.with(this)
                         .load(String.valueOf(trackstreamObj.get("Poster"))).resize(width,width).into(picture);
 
