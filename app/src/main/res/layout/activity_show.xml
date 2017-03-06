@@ -98,7 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/discription"
-        android:text="bladiebladiebladie"
+        android:text="..."
         android:gravity="center"
         android:padding="15dp"
 
