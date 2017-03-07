@@ -64,10 +64,10 @@ public class ShowActivity extends AppCompatActivity {
         asyncTask2.execute(Input);
     }
 
+    /*
+    look for movie and show details
+    */
     public void trackStartIntent(String dataRaw) {
-
-//        ArrayList<String> data = new ArrayList<String>();
-
 
         try {
             trackstreamObj = new JSONObject(dataRaw);
